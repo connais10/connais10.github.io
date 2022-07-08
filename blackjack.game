@@ -1,0 +1,112 @@
+
+from replit import clear
+import art
+import random
+player_cards = []
+dealer_cards = []
+
+
+def deal_cards():
+  cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+  drawn_card = random.choice(cards)
+  return drawn_card
+
+
+
+
+def calculate_score(cards):
+  if sum(cards) == 21 and len(cards) == 2:
+    return 0
+  if 11 in cards and sum(cards) > 21:
+    cards.remove(11)
+    cards.append(1)
+
+  return sum(cards)
+  
+
+
+      
+
+
+
+
+
+
+
+def compare(player_score, dealer_score):
+  if player_score == dealer_score:
+    return "Draw"
+  elif dealer_score == 0:
+    return "You lose, the dealer has blackjack!"
+  elif player_score == 0:
+    return "You got blackjack! You win"
+  elif player_score > 21:
+    return "You went bust, dealer wins!"
+  elif dealer_score > 21:
+    return "Dealer bust, you win!"
+  elif player_score > dealer_score:
+    return "You win!"
+  else:
+    return "You lose..."
+  
+
+
+
+def play_game():
+  player_cards = []
+  dealer_cards = []
+  for x in range(2):
+    player_cards.append(deal_cards())
+    dealer_cards.append(deal_cards())
+    
+  player_score = calculate_score(player_cards)
+  dealer_score = calculate_score(dealer_cards)
+  game_over = False
+  while not game_over:
+    player_score = calculate_score(player_cards)
+    
+  
+    print(f"\nYour cards are: {player_cards}, and your score is {player_score}.")
+    print(f"The computer's first card is {dealer_cards[0]}\n")
+    
+    if player_score == 0 or dealer_score == 0 or player_score > 21:
+      game_over = True
+    
+    else:
+      deal_again = input("Type 'y' to get another card or 'n' to pass: ")
+      if deal_again == 'y':
+        player_cards.append(deal_cards())
+      else:
+        game_over = True
+  
+  while dealer_score != 0 and dealer_score < 17:
+    dealer_cards.append(deal_cards())
+    dealer_score = calculate_score(dealer_cards)
+  
+  
+  if player_score == 0:
+    print(f"Your final hand: {player_cards}")
+    print(f"Dealer's final hand: {dealer_cards}, final score: {dealer_score}")
+    print(compare(player_score, dealer_score))
+  else:
+    print(f"\nYour final hand: {player_cards}, final score: {player_score}")
+    print(f"Dealer's final hand: {dealer_cards}, final score: {dealer_score}")
+    print(compare(player_score, dealer_score))
+
+while input("\nWould you like to play a game of blackjack? 'y' or 'n': ") == 'y':
+  clear()
+  print(art.logo)
+  play_game()
+
+print("SEE YA")
+
+  
+
+
+
+
+
+      
+      
+    
+  
