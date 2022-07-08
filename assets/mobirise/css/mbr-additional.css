@@ -1219,6 +1219,11 @@ a {
   align-items: center;
   display: none;
 }
+@media (max-width: 768px) {
+  .cid-taXZpND0sZ .embla__button {
+    display: none;
+  }
+}
 .cid-taXZpND0sZ .embla__button:disabled {
   cursor: default;
   display: none;
